@@ -9,16 +9,16 @@ camera = picamera.PiCamera()
 camera.resolution = (640, 480)
 
 #set filename for the image
-filename = 'image.jpg'
+filename = 'image'
 
 # specify the destination directory
-destination = "/home/pi/ndviphotos/image.jpg"
+destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
 # wait for a key press to capture the image
 input('Press Enter to capture the image...')
 
 #capture the image
-camera.capture(filename)
+camera.capture(destination)
 
 # print a message that image has been captures
 print('image captured successfully!')
@@ -30,5 +30,5 @@ time.sleep(2)
 camera.close()
 
 #open in default image viewer
-os.system('xdg-open ' + filename)
+os.system('xdg-open ' + destination)
 
