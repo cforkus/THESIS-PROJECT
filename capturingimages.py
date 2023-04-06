@@ -10,7 +10,7 @@ import time
 import os
 
 #initialize the camera
-camera = picamera.Picamera()
+camera = picamera.PiCamera()
 
 #set the resolution of camera
 camera.resolution = (640, 480)
