@@ -24,14 +24,14 @@ GPIO.setup(7,GPIO.OUT)
 
 # Take Noir
 GPIO. output(7,GPIO.LOW)
-os.system('raspistill -o /home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg'. format(timestamp + "NOIR"))
+os.system('raspistill -o /ndviphotos/{}.jpg'. format(timestamp + "NOIR"))
 
 # Take RBG
 GPIO. output(7,GPIO.HIGH)
-os.system('raspistill -o /home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg'. format(timestamp + "RBG"))
+os.system('raspistill -o /ndviphotos/{}.jpg'. format(timestamp + "RBG"))
 
-image_path_Noir = ("/home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg").format(timestamp + "Noir")
-image_path_RBG = ("/home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg").format(timestamp + "RBG")
+image_path_Noir = ("/ndviphotos/{}.jpg").format(timestamp + "Noir")
+image_path_RBG = ("/ndviphotos/{}.jpg").format(timestamp + "RBG")
 
 #increase brightness and contrast of image
 string_convert = ("convert -brightness-contrast -20x30" + "" + image_path_Noir + "" + image_path_Noir)
@@ -52,7 +52,7 @@ def get_nir(image):
     return nir
 
 #print(get_nir(image))
-#cv2.imwrite('/home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg").format(timestamp + "Noir_red"), get_nir(image))
+#cv2.imwrite('/ndviphotos/{}.jpg").format(timestamp + "Noir_red"), get_nir(image))
 
 #get red value from RBG
 def get_red(image2):
@@ -61,7 +61,7 @@ def get_red(image2):
     return red
 
 #print(get_red(image2))
-#cv2.imwrite('/home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg").format(timestamp + "RBG_red"), get_red(image2))
+#cv2.imwrite('/ndviphotos/{}.jpg").format(timestamp + "RBG_red"), get_red(image2))
 
 def ndvi(image, image2):
     bottom = (get_nir(image) + get_red(image2))
@@ -70,4 +70,4 @@ def ndvi(image, image2):
     ndvi = np.multiply(ndvi, 1000)
     return ndvi
 
-cv2.imwrite('/home/pi/thesis_prototype/python_testing/ndvi_photos/{}.jpg'.format(timestamp + "ndvi"), ndvi(image, image2))
+cv2.imwrite('/ndvi_photos/{}.jpg'.format(timestamp + "ndvi"), ndvi(image, image2))
