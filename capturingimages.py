@@ -15,7 +15,7 @@ filename = 'image.jpg'
 input('Press Enter to capture the image...')
 
 #capture the image
-camera.capture(Documents)
+camera.capture(/home/pi/ndviphotos/)
 
 # print a message that image has been captures
 print('image captured successfully!')
@@ -27,5 +27,5 @@ time.sleep(2)
 camera.close()
 
 #open in default image viewer
-os.system('xdg-open ' + Documents)
+os.system('xdg-open ' + /home/pi/ndviphotos/)
 
