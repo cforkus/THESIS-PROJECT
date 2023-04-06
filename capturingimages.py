@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 28 14:54:35 2023
-
-@author: cfork
-"""
-
 import picamera
 import time
 import os
