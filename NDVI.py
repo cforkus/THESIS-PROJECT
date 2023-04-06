@@ -8,7 +8,7 @@ This is a temporary script file.
 
 import cv2
 from time import strftime
-import numpty as np
+import numpy as np
 import os
 import RPi.GPIO as GPIO
 
