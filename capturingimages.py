@@ -11,11 +11,14 @@ camera.resolution = (640, 480)
 #set filename for the image
 filename = 'image.jpg'
 
+# specify the destination directory
+destination = /home/pi/ndviphotos/
+
 # wait for a key press to capture the image
 input('Press Enter to capture the image...')
 
 #capture the image
-camera.capture(/home/pi/ndviphotos/)
+camera.capture(filename)
 
 # print a message that image has been captures
 print('image captured successfully!')
@@ -27,5 +30,5 @@ time.sleep(2)
 camera.close()
 
 #open in default image viewer
-os.system('xdg-open ' + /home/pi/ndviphotos/)
+os.system('xdg-open ' + filename)
 
