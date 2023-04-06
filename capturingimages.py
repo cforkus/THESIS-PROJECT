@@ -12,7 +12,7 @@ camera.resolution = (640, 480)
 filename = 'image.jpg'
 
 # wait for a key press to capture the image
-input('Press Enter to capture the image...')
+input('Press Tab to capture the image...')
 
 #capture the image
 camera.capture(filename)
