@@ -30,5 +30,5 @@ time.sleep(2)
 camera.close()
 
 #open in default image viewer
-os.system('xdg-open ' + destination)
+os.system('feh ' + destination)
 
