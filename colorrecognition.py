@@ -33,5 +33,5 @@ try:
     print('Number of white areas:', num_white_areas)
 
 except Exception as e:
-    print(f"An error occurred: {e}")
+    print("An error occurred: {e}")
 
