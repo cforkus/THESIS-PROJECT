@@ -1,10 +1,7 @@
-import cv2 
-import tkinter as tk
+import cv2
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
-# create the main window
-root = tk.Tk()
 
 try:
     #read the image
@@ -26,11 +23,8 @@ try:
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     #display the image using matplotlib
-    fig = plt.figure(figsize=(8, 6), dpi=80)
-    ax = fig.add_subplot(111)
-    ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    canvas = FigureCanvasTkAgg(fig, master=root)
-    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.show()
 
     #count the number of contours that correspond to white areas
     num_white_areas = 0
@@ -39,11 +33,8 @@ try:
             num_white_areas += 1
 
     #print the number of white areas
-    label = tk.Label(root, text='Number of white areas: ' + str(num_white_areas))
-    label.pack()
-
-    #start the GUI loop
-    root.mainloop()
+    print('Number of white areas:', num_white_areas)
 
 except Exception as e:
-    print("An error occurred:", str(e))
+    print("An error occurred:", str(e)) 
+
