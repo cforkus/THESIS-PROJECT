@@ -21,7 +21,7 @@ try:
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     #display the image using matplotlib
-    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RBG))
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     plt.show()
 
     #count the number of contours that correspond to white areas
