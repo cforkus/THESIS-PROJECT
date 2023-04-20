@@ -1,4 +1,6 @@
 import cv2
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 try:
