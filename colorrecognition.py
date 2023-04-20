@@ -23,6 +23,7 @@ try:
 
     #display the image using matplotlib
     plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.axis('off') # remove axis and ticks
     plt.show()
 
     #count the number of contours that correspond to white areas
@@ -36,3 +37,4 @@ try:
 
 except Exception as e:
     print("An error occurred:", str(e))
+
