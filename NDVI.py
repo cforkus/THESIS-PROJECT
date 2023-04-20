@@ -29,10 +29,10 @@ convert_command = "convert -brightness-contrast -20x30 {} {}".format(noir_path, 
 os.system(convert_command)
 
 # Convert Noir and RBG photos into arrays
-with cv2.imread(noir_path) as image:
-    image = np.array(image, dtype=float) / float(255)
-with cv2.imread(rbg_path) as image2:
-    image2 = np.array(image2, dtype=float) / float(255)
+image = cv2.imread(noir_path)
+image = np.array(image, dtype=float) / float(255)
+image2 = cv2.imread(rbg_path)
+image2 = np.array(image2, dtype=float) / float(255)
 
 # Get NIR values from Noir photo
 def get_nir(image):
@@ -45,7 +45,7 @@ def get_nir(image):
 
 # Get red value from RBG photo
 def get_red(image2):
-    b, g, r, = cv2.split(image2)
+    b, g, r = cv2.split(image2)
     red = r.astype(float)
     return red
 
@@ -53,9 +53,10 @@ def get_red(image2):
 def ndvi(image, image2):
     bottom = (get_nir(image) + get_red(image2))
     bottom[bottom == 0] = 0.01
-    ndvi = (get_nir(image) - get_red(image2)) / bottom
-    ndvi = np.multiply(ndvi, 1000)
-    cv2.imwrite(ndvi_path, ndvi)
+    ndvi_result = (get_nir(image) - get_red(image2)) / bottom
+    ndvi_result = np.multiply(ndvi_result, 1000)
+    cv2.imwrite(ndvi_path, ndvi_result)
 
 ndvi(image, image2)
+
 
