@@ -1,4 +1,5 @@
 import cv2
+import matplotlib.pyplot as plt
 
 try:
     #read the image
@@ -19,9 +20,9 @@ try:
         if w > 10 and h > 10: #filter out small contours
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-    #display the image
-    cv2.imshow('Result', img)
-    cv2.waitKey(0)
+    #display the image using matplotlib
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RBG))
+    plt.show()
 
     #count the number of contours that correspond to white areas
     num_white_areas = 0
