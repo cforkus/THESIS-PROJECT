@@ -16,31 +16,31 @@ filename = 'image'
 destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
 try:
-# wait for a key press to capture the image
+   # wait for a key press to capture the image
    input('Press Enter to capture the image...')
 
-#capture the image
-camera.capture(destination)
+   #capture the image
+   camera.capture(destination)
 
-# print a message that image has been captures
-print('image captured successfully!')
+   # print a message that image has been captures
+   print('image captured successfully!')
 
-#wait for 2 seconds before exiting
-time.sleep(2)
+   #wait for 2 seconds before exiting
+   time.sleep(2)
 
-#close the camera
-camera.close()
+   #close the camera
+   camera.close()
 
-# check if feh is installed, and install it if not
-feh_check = subprocess.run(['which', 'feh'], capture_output=True, text=True)
-if feh_check.returncode != 0:
-   print('feh is not installed, installing...')
-   subprocess.run(['sudo', 'apt-get', 'update'])
-   subprocess.run(['sudo', 'apt-get', 'install', '-y', 'feh'])
-   print('feh installation complete')
+   # check if feh is installed, and install it if not
+   feh_check = subprocess.run(['which', 'feh'], capture_output=True, text=True)
+   if feh_check.returncode != 0:
+      print('feh is not installed, installing...')
+      subprocess.run(['sudo', 'apt-get', 'update'])
+      subprocess.run(['sudo', 'apt-get', 'install', '-y', 'feh'])
+      print('feh installation complete')
 
-#open in default image viewer
-os.system('feh ' + destination)
+   #open in default image viewer
+   os.system('feh ' + destination)
 
 except KeyboardInterrupt:
     # If user interrupts the program with Ctrl+C
