@@ -17,7 +17,7 @@ destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
 try:
 # wait for a key press to capture the image
-input('Press Enter to capture the image...')
+   input('Press Enter to capture the image...')
 
 #capture the image
 camera.capture(destination)
