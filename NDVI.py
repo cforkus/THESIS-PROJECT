@@ -3,6 +3,7 @@ from time import strftime
 import numpy as np
 import os
 import RPi.GPIO as GPIO
+import matplotlib.pyplot as plt
 
 # Define paths
 photo_path = "/home/pi/ndviphotos/"
@@ -55,22 +56,10 @@ def ndvi(image, image2):
     bottom[bottom == 0] = 0.01
     ndvi_result = (get_nir(image) - get_red(image2)) / bottom
     ndvi_result = np.multiply(ndvi_result, 1000)
-
-    # Get min and max values of NDVI image
-    ndvi_min = np.amin(ndvi_result)
-    ndvi_max = np.amax(ndvi_result)
-
-    # Convert NDVI image to uint8
-    ndvi_result = (255 * (ndvi_result - ndvi_min) / (ndvi_max - ndvi_min)).astype(np.uint8)
-
-    # Apply a color map to the NDVI image
-    ndvi_color = cv2.applyColorMap(ndvi_result, cv2.COLORMAP_JET)
-
-    # Add text with NDVI value to the NDVI image
-    ndvi_text = "NDVI: {:.2f}".format(np.mean(ndvi_result))
-    cv2.putText(ndvi_color, ndvi_text, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-
-    # Save NDVI image
-    cv2.imwrite(ndvi_path, ndvi_color)
+    cv2.imwrite(ndvi_path, ndvi_result)
+    plt.imshow(ndvi_result, cmap='jet')
+    plt.axis('off')
+    plt.show()
 
 ndvi(image, image2)
+
