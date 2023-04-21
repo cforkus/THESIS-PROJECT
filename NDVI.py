@@ -3,6 +3,8 @@ from time import strftime
 import numpy as np
 import os
 import RPi.GPIO as GPIO
+import matplotlib
+matplotlib.use('Agg') #use non-interactive backend to save plot as image
 import matplotlib.pyplot as plt
 
 # Define paths
@@ -57,9 +59,14 @@ def ndvi(image, image2):
     ndvi_result = (get_nir(image) - get_red(image2)) / bottom
     ndvi_result = np.multiply(ndvi_result, 1000)
     cv2.imwrite(ndvi_path, ndvi_result)
+    
+     #display the NDVI result using matplotlib and Xming
     plt.imshow(ndvi_result, cmap='jet')
     plt.axis('off')
-    plt.show()
+    plt.savefig('temp.png') #save plot as a temporary image
+    os.system('export DISPLAY=:0 && xdg-open temp.png') #open the temporary image with Xming
+    os.remove('temp.png') #remove the temporary image
+
 
 ndvi(image, image2)
 
