@@ -1,8 +1,12 @@
 import cv2
 import matplotlib
 import matplotlib.pyplot as plt
+import os
 
 try:
+    # set the DISPLAY environment variable to the IP address of your Xming server
+    os.environ['DISPLAY'] = 'X.X.X.X:0.0'
+    
     #read the image
     img = cv2.imread('/home/pi/ndviphotos/image.jpg')
 
