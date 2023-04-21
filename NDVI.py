@@ -4,7 +4,7 @@ import numpy as np
 import os
 import RPi.GPIO as GPIO
 import matplotlib
-matplotlib.use('Agg') #use non-interactive backend to save plot as image
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 # Define paths
