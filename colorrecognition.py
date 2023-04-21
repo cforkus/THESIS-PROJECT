@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from functools32 import lru_cache
 
 # Set the backend to TkAgg
 import matplotlib
