@@ -2,11 +2,11 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-    
-    # Set the backend to TkAgg
-    import matplotlib
-    matplotlib.use('TkAgg')
-    
+# Set the backend to TkAgg
+import matplotlib
+matplotlib.use('TkAgg')
+
+try:
     #read the image
     img = cv2.imread('/home/pi/ndviphotos/image.jpg')
 
