@@ -61,20 +61,23 @@ def ndvi(image, image2):
     ndvi_result = np.multiply(ndvi_result, 1000)
  
     
-# Display the NDVI calculation result
+    # Display the NDVI calculation result
     plt.imshow(ndvi_result, cmap='jet')
     plt.title('NDVI Calculation Result')
     plt.axis('off')
     plt.show()
+
+    return ndvi_result
      
- # Save the NDVI image and display it using Xming
-    cv2.imwrite(ndvi_path, ndvi_result)
-    plt.imshow(cv2.imread(ndvi_path))
-    plt.title('NDVI Image')
-    plt.axis('off')
-    plt.savefig('temp.png')
-    os.system('export DISPLAY=:0 && xdg-open temp.png')
-    os.remove('temp.png')
+# Save the NDVI image and display it using Xming
+ndvi_result = ndvi(image, image2)
+cv2.imwrite(ndvi_path, ndvi_result)
+plt.imshow(cv2.imread(ndvi_path))
+plt.title('NDVI Image')
+plt.axis('off')
+plt.savefig('temp.png')
+os.system('export DISPLAY=:0 && xdg-open temp.png')
+os.remove('temp.png')
 
 
 ndvi(image, image2)
