@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+import subprocess
 
 # Define paths
 photo_path = "/home/pi/ndviphotos/"
@@ -64,9 +65,10 @@ def ndvi(image, image2):
     plt.imshow(ndvi_result, cmap='jet')
     plt.axis('off')
     plt.savefig('temp.png') #save plot as a temporary image
-    os.system('export DISPLAY=:0 && xdg-open temp.png') #open the temporary image with Xming
+    subprocess.run(["xdg-open", "temp.png"]) #open the temporary image with default viewer
     os.remove('temp.png') #remove the temporary image
 
 
 ndvi(image, image2)
+
 
