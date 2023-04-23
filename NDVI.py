@@ -80,6 +80,6 @@ os.system('export DISPLAY=:0 && xdg-open temp.png')
 os.remove('temp.png')
 
 
-ndvi(image, image2)
-
-
+# Print NDVI value
+ndvi_value = ndvi(image, image2)
+print("NDVI Value: ", ndvi_value)
