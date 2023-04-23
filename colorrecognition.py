@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('TkAgg')
 
-from backports.functools_lru_cache import lru_cache
-
 try:
     #read the image
     img = cv2.imread('/home/pi/ndviphotos/image.jpg')
