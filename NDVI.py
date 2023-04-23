@@ -59,14 +59,22 @@ def ndvi(image, image2):
     bottom[bottom == 0] = 0.01
     ndvi_result = (get_nir(image) - get_red(image2)) / bottom
     ndvi_result = np.multiply(ndvi_result, 1000)
-    cv2.imwrite(ndvi_path, ndvi_result)
+ 
     
-     #display the NDVI result using matplotlib and Xming
+     # Display the NDVI calculation result
     plt.imshow(ndvi_result, cmap='jet')
+    plt.title('NDVI Calculation Result')
     plt.axis('off')
-    plt.savefig('temp.png') #save plot as a temporary image
-    subprocess.run(["xdg-open", "temp.png"]) #open the temporary image with default viewer
-    os.remove('temp.png') #remove the temporary image
+    plt.show()
+    
+    # Save the NDVI image and display it using Xming
+    cv2.imwrite(ndvi_path, ndvi_result)
+    plt.imshow(cv2.imread(ndvi_path))
+    plt.title('NDVI Image')
+    plt.axis('off')
+    plt.savefig('temp.png')
+    os.system('export DISPLAY=:0 && xdg-open temp.png')
+    os.remove('temp.png')
 
 
 ndvi(image, image2)
