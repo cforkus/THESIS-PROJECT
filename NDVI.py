@@ -76,7 +76,7 @@ plt.imshow(cv2.imread(ndvi_path))
 plt.title('NDVI Image')
 plt.axis('off')
 plt.savefig('temp.png')
-os.system('export DISPLAY=:0 && xdg-open temp.png')
+os.system('export DISPLAY=:0 && feh temp.png')
 os.remove('temp.png')
 
 
