@@ -1,8 +1,8 @@
-import subprocess
 import time
 import os
+import subprocess
 
-# Set filename for the image
+# Set the filename for the image
 filename = 'image.jpg'
 
 # Specify the destination directory
@@ -12,7 +12,10 @@ try:
     # Wait for a key press to capture the image
     input('Press Enter to capture the image...')
 
-    # Capture the image using raspistill with IR-cut filter
+    # Disable the IR filter
+    subprocess.run(['uvcdynctrl', '-s', 'Focus, Auto', '0'])
+
+    # Capture the image using raspistill
     subprocess.run(['raspistill', '-o', destination])
 
     # Print a message that the image has been captured
@@ -38,3 +41,4 @@ except KeyboardInterrupt:
 except Exception as e:
     # If an error occurs
     print('An error occurred:', str(e))
+
