@@ -12,6 +12,7 @@ camera.color_effects = None
 camera.rotation = 0
 camera.awb_mode = 'off'
 camera.exposure_mode = 'auto'
+
 #set the resolution of camera
 camera.resolution = (640, 480)
 
@@ -28,11 +29,15 @@ try:
    #capture the image
    camera.capture(destination)
 
-   # print a message that image has been captures
+   # print a message that image has been captured
    print('image captured successfully!')
 
-   #wait for 2 seconds before exiting
-   time.sleep(2)
+ # Perform demosaicing to obtain a full-color image
+    raw_image = cv2.imread(destination, cv2.IMREAD_UNCHANGED)
+    color_image = cv2.cvtColor(raw_image, cv2.COLOR_BayerRG2RGB)
+      
+ # Save the demosaiced color image
+    cv2.imwrite(color_image_destination, color_image)
 
    #close the camera
    camera.close()
