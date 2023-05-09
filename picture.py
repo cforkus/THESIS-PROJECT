@@ -26,8 +26,8 @@ try:
     # Wait for a key press to capture the image
     input('Press Enter to capture the image...')
 
-    # Send a high signal to pin 7 to turn off IR filter
-    GPIO.output(pin, GPIO.HIGH)
+    # Send a low signal to pin 7 to turn off IR filter
+    GPIO.output(pin, GPIO.LOW)
 
     # Capture the image
     camera.capture(destination)
