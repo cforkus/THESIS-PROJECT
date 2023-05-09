@@ -6,14 +6,6 @@ import subprocess
 #initialize the camera
 camera = picamera.PiCamera()
 
-# Disable camera effects and image processing
-camera.image_effect = 'none'
-camera.color_effects = None
-camera.rotation = 0
-camera.awb_mode = 'off'
-camera.exposure_mode = 'auto'
-#set the resolution of camera
-camera.resolution = (640, 480)
 
 #set filename for the image
 filename = 'image'
