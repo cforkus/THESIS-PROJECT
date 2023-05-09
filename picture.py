@@ -8,6 +8,13 @@ filename = 'image'
 # Specify the destination directory
 destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
+# Disable camera effects and image processing
+camera.image_effect = 'none'
+camera.color_effects = None
+camera.rotation = 0
+camera.awb_mode = 'off'
+camera.exposure_mode = 'auto'
+
 try:
     # Wait for a key press to capture the image
     input('Press Enter to capture the image...')
