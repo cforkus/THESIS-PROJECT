@@ -13,6 +13,15 @@ filename = 'image'
 # specify the destination directory
 destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
+# Set GPIO pin outputs
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+GPIO.setup(7, GPIO.OUT)
+
+# Take RBG photo
+GPIO.output(7, GPIO.HIGH)
+os.system("raspistill -o {}".format(rbg_path))
+
 try:
    # wait for a key press to capture the image
    input('Press Enter to capture the image...')
