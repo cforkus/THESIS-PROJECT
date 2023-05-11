@@ -2,60 +2,56 @@ import picamera
 import time
 import os
 import subprocess
+import RPi.GPIO as GPIO
 
-#initialize the camera
+# Initialize the camera
 camera = picamera.PiCamera()
 
-
-#set filename for the image
+# Set filename for the image
 filename = 'image'
 
-# specify the destination directory
+# Specify the destination directory
 destination = "/home/pi/ndviphotos/{}.jpg".format(filename)
 
-# Set GPIO pin outputs
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(7, GPIO.OUT)
-
-# Take RBG photo
-GPIO.output(7, GPIO.HIGH)
-os.system("raspistill -o {}".format(rbg_path))
-
 try:
-   # wait for a key press to capture the image
-   input('Press Enter to capture the image...')
+    # Set GPIO pin outputs
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    GPIO.setup(7, GPIO.OUT)
 
-   #capture the image
-   camera.capture(destination)
+    # Take RGB photo
+    GPIO.output(7, GPIO.HIGH)
+    time.sleep(0.5)  # Delay to ensure the IR filter is disabled
+    camera.capture(destination)
 
-   # print a message that image has been captures
-   print('image captured successfully!')
+    # Print a message that the image has been captured
+    print('Image captured successfully!')
 
-   #wait for 2 seconds before exiting
-   time.sleep(2)
+    # Wait for 2 seconds before exiting
+    time.sleep(2)
 
-   #close the camera
-   camera.close()
+    # Close the camera
+    camera.close()
 
-   # check if feh is installed, and install it if not
-   feh_check = subprocess.run(['which', 'feh'], capture_output=True, text=True)
-   if feh_check.returncode != 0:
-      print('feh is not installed, installing...')
-      subprocess.run(['sudo', 'apt-get', 'update'])
-      subprocess.run(['sudo', 'apt-get', 'install', '-y', 'feh'])
-      print('feh installation complete')
+    # Check if feh is installed, and install it if not
+    feh_check = subprocess.run(['which', 'feh'], capture_output=True, text=True)
+    if feh_check.returncode != 0:
+        print('feh is not installed, installing...')
+        subprocess.run(['sudo', 'apt-get', 'update'])
+        subprocess.run(['sudo', 'apt-get', 'install', '-y', 'feh'])
+        print('feh installation complete')
 
-   #open in default image viewer
-   os.system('feh ' + destination)
+    # Open in the default image viewer
+    os.system('feh ' + destination)
 
 except KeyboardInterrupt:
-    # If user interrupts the program with Ctrl+C
+    # If the user interrupts the program with Ctrl+C
     print('\nProgram interrupted by user')
 except Exception as e:
     # If an error occurs
     print('An error occurred:', str(e))
 
 finally:
-    # always close the camera, even if an error occurred
+    # Always close the camera and clean up GPIO settings
     camera.close()
+    GPIO.cleanup()
