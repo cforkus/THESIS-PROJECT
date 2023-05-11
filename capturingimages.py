@@ -10,6 +10,9 @@ camera = picamera.PiCamera()
 # Set the camera resolution
 camera.resolution = (1920, 1080)  # Example resolution (adjust as needed)
 
+# Set the camera focus mode
+camera.focus_mode = 'auto'
+
 # Set filename for the image
 filename = 'image'
 
