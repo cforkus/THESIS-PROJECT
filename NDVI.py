@@ -18,14 +18,14 @@ ndvi_path = "{}{}.jpg".format(photo_path, timestamp + "ndvi")
 # Set GPIO pin outputs
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(7, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
 
 # Take Noir photo
-GPIO.output(7, GPIO.LOW)
+GPIO.output(8, GPIO.LOW)
 os.system("raspistill -o {}".format(noir_path))
 
 # Take RBG photo
-GPIO.output(7, GPIO.HIGH)
+GPIO.output(8, GPIO.HIGH)
 os.system("raspistill -o {}".format(rbg_path))
 
 # Increase brightness and contrast of Noir photo
