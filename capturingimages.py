@@ -17,10 +17,10 @@ try:
     # Set GPIO pin outputs
     GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
-    GPIO.setup(15, GPIO.OUT)
+    GPIO.setup(8, GPIO.OUT)
 
     # Take RGB photo
-    GPIO.output(15, GPIO.HIGH)
+    GPIO.output(8, GPIO.HIGH)
     time.sleep(0.5)  # Delay to ensure the IR filter is disabled
     camera.capture(destination)
 
