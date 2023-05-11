@@ -29,6 +29,14 @@ try:
     GPIO.output(8, GPIO.HIGH)
     time.sleep(0.5)  # Delay to ensure the IR filter is disabled
     camera.capture(destination)
+    
+    # Adjust focus automatically
+    camera.start_preview()
+    time.sleep(2)  # Allow time for autofocus to adjust
+    camera.stop_preview()
+    
+    # Capture the image
+    camera.capture(destination)
 
     # Print a message that the image has been captured
     print('Image captured successfully!')
