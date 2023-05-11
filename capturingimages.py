@@ -10,8 +10,6 @@ camera = picamera.PiCamera()
 # Set the camera resolution
 camera.resolution = (1920, 1080)  # Example resolution (adjust as needed)
 
-# Set the camera focus mode
-camera.focus_mode = 'auto'
 
 # Set filename for the image
 filename = 'image'
@@ -29,11 +27,7 @@ try:
     GPIO.output(8, GPIO.HIGH)
     time.sleep(0.5)  # Delay to ensure the IR filter is disabled
     camera.capture(destination)
-    
-    # Adjust focus automatically
-    camera.start_preview()
-    time.sleep(2)  # Allow time for autofocus to adjust
-    camera.stop_preview()
+ 
     
     # Capture the image
     camera.capture(destination)
