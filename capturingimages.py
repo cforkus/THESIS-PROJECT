@@ -7,6 +7,9 @@ import RPi.GPIO as GPIO
 # Initialize the camera
 camera = picamera.PiCamera()
 
+# Set the camera resolution
+camera.resolution = (1920, 1080)  # Example resolution (adjust as needed)
+
 # Set filename for the image
 filename = 'image'
 
@@ -55,3 +58,4 @@ finally:
     # Always close the camera and clean up GPIO settings
     camera.close()
     GPIO.cleanup()
+
