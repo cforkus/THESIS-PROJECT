@@ -18,17 +18,15 @@ try:
 
     # Find contours in the thresholded image
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
+ 
     # Iterate over each contour and draw a rectangle around it
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
         if w > 10 and h > 10:  # Filter out small contours
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-    #iterate over each contour and draw rectangle around it
-    for contour in contours:
-        x, y, w, h = cv2.boundingRect(contour)
-        if w > 10 and h > 10: #filter out small contours
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            # Calculate the extent of the contour (ratio of contour area to bounding rectangle area)
+            extent = cv2.contourArea(contour) / (w * h)
+            if extent < 0.9:  # Filter out contours with high extent (likely glare)
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     #display the image using matplotlib
     plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
