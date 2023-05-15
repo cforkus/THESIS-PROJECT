@@ -1,3 +1,4 @@
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,42 +8,36 @@ import matplotlib
 matplotlib.use('TkAgg')
 
 try:
-    # Read the image
+    #read the image
     img = cv2.imread('/home/pi/ndviphotos/image.jpg')
 
-    # Convert the image to grayscale
+    #convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Apply adaptive thresholding with adjusted parameters
-    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 25, 5)
+    #threshold the image to create a binary mask
+    thresh = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY)[1]
 
-    # Find contours in the thresholded image
+    #find contours in the mask
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Filter contours by color range and area
-    white_contours = []
+    #iterate over each contour and draw rectangle around it
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
-        roi = img[y:y+h, x:x+w]
-        hsv_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
-        lower_white = np.array([0, 0, 200], dtype=np.uint8)
-        upper_white = np.array([180, 30, 255], dtype=np.uint8)
-        mask = cv2.inRange(hsv_roi, lower_white, upper_white)
-        if cv2.contourArea(contour) > 50 and cv2.countNonZero(mask) > 0:
-            white_contours.append(contour)
+        if w > 10 and h > 10: #filter out small contours
+            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-    # Draw rectangles around white contours
-    for contour in white_contours:
-        x, y, w, h = cv2.boundingRect(contour)
-        cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-    # Display the image using matplotlib
+    #display the image using matplotlib
     plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    plt.axis('off')
+    plt.axis('off') # remove axis and ticks
     plt.show()
 
-    # Count the number of white areas
-    num_white_areas = len(white_contours)
+    #count the number of contours that correspond to white areas
+    num_white_areas = 0
+    for contour in contours:
+        if cv2.contourArea(contour) > 50: #change the threshold area as per requirement
+            num_white_areas += 1
+
+    #print the number of white areas
     print('Number of white areas:', num_white_areas)
 
 except Exception as e:
