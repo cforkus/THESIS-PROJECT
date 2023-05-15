@@ -13,12 +13,17 @@ try:
     #convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    #threshold the image to create a binary mask
-    thresh = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY)[1]
+    # Apply adaptive thresholding
+    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
 
-    #find contours in the mask
+    # Find contours in the thresholded image
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    # Iterate over each contour and draw a rectangle around it
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        if w > 10 and h > 10:  # Filter out small contours
+            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
     #iterate over each contour and draw rectangle around it
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
